@@ -4,7 +4,7 @@ import portal from '../portalRM.png';
 
 function Landing() {
     return (
-      <Grid templateColumns="repeat(3, 1fr)">
+      <Grid w='100%' h= '100%'templateColumns="repeat(3, 1fr)">
   
          <Box bg='black' w='100%' color='#314E1C'>
            <Heading color='white' as='h1' size='2xl'>
@@ -17,7 +17,7 @@ function Landing() {
         
        
         <Box bg='black' w='100%' color='#314E1C'>
-          <Image size='700px' src={portal} alt='portal'/>
+          <Image size='100%' src={portal} alt='portal'/>
         </Box>
         <Box w='100%' bg='black' color='#314E1C'>
           <Text as='b' fontSize='3xl'>

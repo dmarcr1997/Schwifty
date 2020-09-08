@@ -4,7 +4,6 @@ import App from './App';
 import { ThemeProvider, Heading, Box } from "@chakra-ui/core";
 
 const headerStyle = {
-  fontSize: '5em',
   backgroundColor:'#69AD53',
   color: '#C1F762',
   margin: 0,
@@ -13,8 +12,8 @@ const headerStyle = {
 
 ReactDOM.render(
     <ThemeProvider >
-      <Heading style={headerStyle}>Schwifty</Heading>
-      <Box w='100%'>
+      <Heading size='6xl' fontSize='5em' w='100%' style={headerStyle}>Schwifty</Heading>
+      <Box h='100%' w='100%'>
         <App/>    
       </Box>
     </ThemeProvider>,
