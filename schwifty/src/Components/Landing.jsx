@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, Box, Image, Text,Heading } from "@chakra-ui/core";
-import portal from '../portalRM.png';
+import portal from '../media/portalRM.png';
 
 function Landing() {
     return (
-      <Grid w='100%' h= '100%'templateColumns="repeat(3, 1fr)">
+      <Grid w='100%' h= '100%' templateColumns="repeat(3, 1fr)">
   
          <Box bg='black' w='100%' color='#314E1C'>
            <Heading color='white' as='h1' size='2xl'>
