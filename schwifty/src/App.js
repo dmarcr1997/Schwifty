@@ -1,14 +1,17 @@
 import React from 'react';
-import Landing from './Components/Landing.jsx';
-import Feed from './Components/Feed.jsx';
-import Message from './Components/Message.jsx';
+import Landing from './Components/Landing'; 
+import Feed from './Components/Feed'; 
+import Message from './Components/Message'; 
+import Profile from './Components/Profile';
+
 function App() {
   return (
     <>
       <br/>
       {/* <Landing/> */}
       {/* <Feed/> */}
-      <Message/>
+      {/* <Message/> */}
+      <Profile/>
     </>
   );
 }

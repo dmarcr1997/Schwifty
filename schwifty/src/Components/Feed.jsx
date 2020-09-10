@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Flex, Box, Collapse, Text, Heading, Button } from "@chakra-ui/core";
+import { Grid, Flex, Box, Collapse, Text, Heading, Button} from "@chakra-ui/core";
 import PortalGun from '../media/portalGun.jpg';
 function Feed(){
     const [show, setShow] = React.useState(false);
