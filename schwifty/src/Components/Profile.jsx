@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid, Box, Image, Text,Heading, Stack } from "@chakra-ui/core";
+import { Grid, Image, Text,Heading, Stack } from "@chakra-ui/core";
 
 function Profile(){
 
     return(
-        <Stack align='center' justify='center'>
+        <Stack align='center' justify='center'> 
             <Grid bg='#69AD53' borderRadius={10} w='70%' templateColumns="repeat(3, 1fr)" p={5} gap={8}>
                 <Stack><Text> </Text></Stack>
                 <Stack isInline w='100%' align='center'>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Box, Image, Text,Heading } from "@chakra-ui/core";
 import portal from '../media/portalRM.png';
 
-function Landing() {
+function Landing(props) {
     return (
       <Grid w='100%' h= '100%' templateColumns="repeat(3, 1fr)">
   
@@ -17,7 +17,7 @@ function Landing() {
         
        
         <Box bg='black' w='100%' color='#314E1C'>
-          <Image size='100%' src={portal} alt='portal'/>
+          <Image size='100%' onClick={() => props.goToHomePage()} src={portal} alt='portal'/>
         </Box>
         <Box w='100%' bg='black' color='#314E1C'>
           <Text as='b' fontSize='3xl'>
