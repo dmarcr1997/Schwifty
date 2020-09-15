@@ -6,8 +6,8 @@ import bodyParser from 'body-parser';
 import { connect } from './utils/db.js';
 
 // Express Route
-import peopleRoute from './routes/people.route.js';
-import messageRoute from './routes/message.route.js';
+import peopleRoute from './resources/people/people.router.js';
+import messageRoute from './resources/messages/message.router.js';
 // Connecting mongoDB Database
 
 const app = express();

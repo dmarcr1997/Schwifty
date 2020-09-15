@@ -1,4 +1,10 @@
+import mongoose from 'mongoose';
+
 const database = {
-    db: 'mongodb://localhost:27017/reactdb'
+    db: 'mongodb://localhost:27017/schwifty'
 };
-export default database
+export const connect = (url = database.db, opts={}) => {
+    return mongoose.connect(url,
+        {...opts, useNewUrlParser: true}
+    )
+}
