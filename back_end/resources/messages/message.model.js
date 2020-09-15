@@ -2,24 +2,24 @@ import mongoose from 'mongoose';
 import bycrypt from 'bcrypt.js';
 import { trimEnd } from 'lodash';
 
-const personSchema = new mongoose.Schema(
+const messageSchema = new mongoose.Schema(
     {
-        name:{
+        content:[{
             type:String,
-            required:true,
             trim:true
+        }],
+        person_one:{
+            type:mongoose.SchemaType.ObjectId,
+            ref:'person',
+            required: true
         },
-        status:{
-            type:String,
-            default:'unknown',
-            trim:true
-        },
-        species: String,
-        type: String,
-        location:String,
-        location_image:String,
+        person_2: {
+            type:mongoose.SchemaType.ObjectId,
+            ref:'person',
+            required: true
+        }
     },
     {timestamps: true}
 )
 
-export const Person = mongoose.model('person', personSchema)
+export const Message = mongoose.model('message', messageSchema)
