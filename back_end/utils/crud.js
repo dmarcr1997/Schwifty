@@ -1,65 +1,62 @@
 export const getOne = model => async (req, res) => {
-    const item = await model.findById(req.params.id).exec()
-    if (item) {
-      res.status(200)
-      res.send({ data: item })
-    } else {
-      res.status(404)
-      res.send({ error: 'couldnt find that one' })
-    }
+  const id = req.params.id
+  const userId = req.user._id
+
+  const doc = await model.findOne({ _id: id, createdBy: userId })
+  if (!doc) {
+    res.status(404).end()
+  } else {
+    res.status(200).json({ data: doc })
   }
-  
-  export const getMany = model => async (req, res) => {
-    const items = await model.find().exec()
-    if (items) {
-      res.status(200)
-      res.send({ data: items })
-    } else {
-      res.status(404)
-      res.send({ error: 'couldnt find anything' })
-    }
+}
+
+export const getMany = model => async (req, res) => {
+  const docs = await model.find({ createdBy: req.user._id })
+  if (!docs) {
+    res.status(404).end()
+  } else {
+    res.status(200).json({ data: docs })
   }
-  
-  export const createOne = model => async (req, res) => {
-    const item = await model.create(req.params).exec()
-    if (item) {
-      res.status(200)
-      res.send({ data: item })
-    } else {
-      res.status(404)
-      res.send({ error: 'couldnt create that' })
-    }
+}
+
+export const createOne = model => async (req, res) => {
+  const doc = await model.create({ ...req.body, createdBy: req.user._id })
+  res.status(201).json({ data: doc })
+}
+
+export const updateOne = model => async (req, res) => {
+  const doc = await model.findOneAndUpdate(
+    {
+      _id: req.params.id,
+      createdBy: req.user._id
+    },
+    req.body,
+    { new: true }
+  )
+  if (!doc) {
+    res.status(400).end()
+  } else {
+    res.status(200).json({ data: doc })
   }
-  
-  export const updateOne = model => async (req, res) => {
-    const item = await model
-      .findByIdAndUpdate(req.params.id, req.params.data)
-      .exec()
-    if (item) {
-      res.status(200)
-      res.send({ data: item })
-    } else {
-      res.status(404)
-      res.send({ error: 'couldnt update that' })
-    }
-  }
-  
-  export const removeOne = model => async (req, res) => {
-    const item = await model.findByIdAndRemove(req.params.id).exec()
-    if (item) {
-      res.status(200)
-      res.send({ removed: item })
-    } else {
-      res.status(404)
-      res.send({ error: 'couldnt remove that' })
-    }
-  }
-  
-  export const crudControllers = model => ({
-    removeOne: removeOne(model),
-    updateOne: updateOne(model),
-    getMany: getMany(model),
-    getOne: getOne(model),
-    createOne: createOne(model)
+}
+
+export const removeOne = model => async (req, res) => {
+  const doc = await model.findOneAndRemove({
+    _id: req.params.id,
+    createdBy: req.user._id
   })
-  
+  .exec()
+  if (!doc) {
+    res.status(400).end()
+  } else {
+    res.status(200).json({ data: doc })
+  }
+}
+
+export const crudControllers = model => ({
+  removeOne: removeOne(model),
+  updateOne: updateOne(model),
+  getMany: getMany(model),
+  getOne: getOne(model),
+  createOne: createOne(model)
+})
