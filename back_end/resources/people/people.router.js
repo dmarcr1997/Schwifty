@@ -4,10 +4,10 @@ import controllers from './people.controllers.js';
 const router = Router();
 
 router.route('/')
-    .get(controllers.getPeople)
-    .post(controllers.createPeople);
+    .get(controllers.getMany)
+    .post(controllers.createOne);
    
 router.route('/:id')
-    .get(controller.getPerson);
+    .get(controllers.getOne);
 
 export default router

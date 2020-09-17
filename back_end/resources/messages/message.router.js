@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import controllers from './people.controllers.js';
+import controllers from './message.controllers.js';
 
 const router = Router();
 
 router.route('/')
-    .get(controllers.getMessages)
-    .post(controllers.createMessage);
+    .get(controllers.getMany)
+    .post(controllers.createOne);
    
 router.route('/:id')
-    .get(controller.getMessages);
+    .get(controllers.getOne);
 
 export default router
