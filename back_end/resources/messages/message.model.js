@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import bycrypt from 'bcrypt.js';
-import { trimEnd } from 'lodash';
+
 
 const messageSchema = new mongoose.Schema(
     {
@@ -9,12 +8,12 @@ const messageSchema = new mongoose.Schema(
             trim:true
         }],
         person_one:{
-            type:mongoose.SchemaType.ObjectId,
+            type:mongoose.SchemaTypes.ObjectId,
             ref:'person',
             required: true
         },
         person_2: {
-            type:mongoose.SchemaType.ObjectId,
+            type:mongoose.SchemaTypes.ObjectId,
             ref:'person',
             required: true
         }

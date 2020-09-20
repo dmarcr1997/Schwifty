@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import Router from 'express';
 import controllers from './message.controllers.js';
 
 const router = Router();
