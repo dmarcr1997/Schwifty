@@ -8,6 +8,11 @@ const personSchema = new mongoose.Schema(
             required:true,
             trim:true
         },
+        image: {
+            type:String,
+            required:true,
+            trim:true
+        },
         status:{
             type:String,
             default:'unknown',
@@ -16,7 +21,7 @@ const personSchema = new mongoose.Schema(
         species: String,
         type: String,
         location:String,
-        location_image:String,
+        location_link:String,
     },
     {timestamps: true}
 )

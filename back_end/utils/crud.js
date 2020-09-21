@@ -11,7 +11,7 @@ export const getOne = model => async (req, res) => {
 }
 
 export const getMany = model => async (req, res) => {
-  const docs = await model.find({ createdBy: req.user._id })
+  const docs = await model.find({})
   if (!docs) {
     res.status(404).end()
   } else {
