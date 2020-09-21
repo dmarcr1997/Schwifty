@@ -28,8 +28,18 @@ const createPeople = (res, data) => {
     console.log(`Created ${count} people on the API`)
     res.redirect('/person')
 }
+
+const GetRandomPerson = (res, req) => {
+    const people = Person.find({})
+    // get person from random number 
+    // implment this funcion
+    //  min = Math.ceil(min);
+    // max = Math.floor(max);
+    // return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 export default {
     ...crudControllers(Person),
+    getOne: GetRandomPerson,
     call: callAPI
 }
 
