@@ -3,7 +3,6 @@ import { Person } from './person.model.js'
 import request from 'request'
 
 const callAPI = async (req, res) => {
-    console.log('REQUEST RICK AND MORTY')
     await request
     .get('https://rickandmortyapi.com/api/character?page=2', (err, resp, body) => {
         createPeople(res, JSON.parse(body))
@@ -35,7 +34,7 @@ const GetRandomPerson = async (req, res) => {
     // get person from random number 
     let min = Math.ceil(0);
     let max = Math.floor(people.length);
-    const indx = Math.floor(Math.random() * (max - min + 1)) + min;
+    let indx = Math.floor(Math.random() * (max - min + 1)) + min;
     res.send(people[indx])
 }
 export default {

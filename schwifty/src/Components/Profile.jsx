@@ -13,14 +13,13 @@ class Profile extends Component{
                 <Grid bg='#69AD53' borderRadius={10} w='70%' templateColumns="repeat(3, 1fr)" p={5} gap={8}>
                     <Stack><Text> </Text></Stack>
                     <Stack isInline w='100%' align='center'>
-                        <Image border='5px white solid' size='xl' src="https://rickandmortyapi.com/api/character/avatar/580.jpeg" alt='turle'/>
+                        <Image border='5px white solid' size='xl' src={this.props.image} alt='turle'/>
                         <Text border='5px white solid' bg='black' as='b' fontSize='2em' color='#314E11' size='xl'>
-                            id: 580<br/>
-                            name: Secret Service Snake<br/>
-                            status: Alive<br/>
-                            species: Animal<br/>
-                            type: Snake<br/>
-                            gender: Male<br/>
+                            Name: {this.props.name}<br/>
+                            status: {this.props.status}<br/>
+                            species: {this.props.species}<br/>
+                            type: {this.props.type}<br/>
+                            gender: GET LATER<br/>
                         </Text>
                     </Stack>
                     <Stack><Text> </Text></Stack>
@@ -76,6 +75,18 @@ class Profile extends Component{
             </Stack>
         )
     }
+}
+
+const mapStateToProps = state => {
+    debugger
+    return({
+        name: state.user.name,
+        type: state.user.type,
+        species: state.user.species,
+        image: state.user.image,
+        location: state.user.location,
+        status: state.user.status
+    })
 }
 
 export default connect(mapStateToProps)(Profile);

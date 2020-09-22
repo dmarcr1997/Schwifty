@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { getUser } from '../Actions/PersonActions';
 
 class Landing extends Component {
+
+    login = () => {
+      this.props.getUser()
+      this.props.goToHomePage()
+    }
     render(){
       return (
         <Grid w='100%' h= '100%' templateColumns="repeat(3, 1fr)">
@@ -20,10 +25,7 @@ class Landing extends Component {
           
         
           <Box bg='black' w='100%' color='#314E1C'>
-            <Image size='100%' onClick={() => {
-              this.props.getUser()
-              this.props.goToHomePage()
-              }} src={portal} alt='portal'/>
+            <Image size='100%' onClick={() => this.login()} src={portal} alt='portal'/>
           </Box>
           <Box w='100%' bg='black' color='#314E1C'>
             <Text as='b' fontSize='3xl'>
