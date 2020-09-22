@@ -5,7 +5,7 @@ import request from 'request'
 const callAPI = async (req, res) => {
     console.log('REQUEST RICK AND MORTY')
     await request
-    .get('https://rickandmortyapi.com/api/character', (err, resp, body) => {
+    .get('https://rickandmortyapi.com/api/character?page=2', (err, resp, body) => {
         createPeople(res, JSON.parse(body))
     })
 }
@@ -29,13 +29,14 @@ const createPeople = (res, data) => {
     res.redirect('/person')
 }
 
-const GetRandomPerson = (res, req) => {
-    const people = Person.find({})
+const GetRandomPerson = async (req, res) => {
+    const people = await Person.find({})
+    
     // get person from random number 
-    // implment this funcion
-    //  min = Math.ceil(min);
-    // max = Math.floor(max);
-    // return Math.floor(Math.random() * (max - min + 1)) + min;
+    let min = Math.ceil(0);
+    let max = Math.floor(people.length);
+    const indx = Math.floor(Math.random() * (max - min + 1)) + min;
+    res.send(people[indx])
 }
 export default {
     ...crudControllers(Person),
