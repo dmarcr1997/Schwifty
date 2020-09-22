@@ -14,16 +14,16 @@ const headerStyle = {
   padding: 20,
 }
 
-import personReducer from './reducers/userReducer'
 const store = createStore(personReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
     <ThemeProvider >
-      <Provider store={store}></Provider>
+      <Provider store={store}>
       <Heading size='6xl' fontSize='5em' w='100%' style={headerStyle}>Schwifty</Heading>
       <Box h='100%' w='100%'>
         <App/>    
       </Box>
+      </Provider>
     </ThemeProvider>,
   document.getElementById('root')
 );

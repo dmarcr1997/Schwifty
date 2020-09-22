@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Grid, Image, Text,Heading, Stack } from "@chakra-ui/core";
-
+import { connect } from 'react-redux';
 class Profile extends Component{
 
     componentDidMount(){
@@ -78,4 +78,4 @@ class Profile extends Component{
     }
 }
 
-export default Profile;
+export default connect(mapStateToProps)(Profile);

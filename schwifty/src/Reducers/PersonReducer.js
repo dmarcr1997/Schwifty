@@ -1,4 +1,4 @@
-const personReducer = (state = {
+export const personReducer = (state = {
     id: '',
     name: '',
     messages: '',
@@ -6,12 +6,17 @@ const personReducer = (state = {
 }, action) => {
     switch(action.type){
         case 'GET_USER':
+            let user = action.user
             return{
-                id: action.id,
-                name: action.name,
-                messages: action.messages,
+                id: user._id,
+                name: user.name,
+                image: user.image,
+                status: user.status,
+                species: user.species,
+                location: user.location,
+                type: user.type,
                 loggedIn: true 
-            }
+            } //add messages later
         case 'LOGOUT':
             return{
                 id: '',
@@ -29,5 +34,3 @@ const personReducer = (state = {
             }
     }
 }
-
-export default personReducer
