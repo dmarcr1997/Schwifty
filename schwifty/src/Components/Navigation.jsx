@@ -14,7 +14,6 @@ function Navigation(props) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     
     function capitalize(word){
-        debugger
         return word.charAt(1).toUpperCase() + word.slice(2);
     };
 

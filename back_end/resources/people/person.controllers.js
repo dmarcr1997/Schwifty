@@ -1,6 +1,8 @@
-import {crudControllers } from '../../utils/crud.js'
-import { Person } from './person.model.js'
-import request from 'request'
+import {crudControllers } from '../../utils/crud.js';
+import { Person } from './person.model.js';
+import request from 'request';
+import MarkovGen from 'markov-generator';
+import { data } from '../data.js';
 
 const callAPI = async (req, res) => {
     await request
@@ -35,7 +37,20 @@ const GetRandomPerson = async (req, res) => {
     let min = Math.ceil(0);
     let max = Math.floor(people.length);
     let indx = Math.floor(Math.random() * (max - min + 1)) + min;
+    generateText();
     res.send(people[indx])
+}
+
+const generateText = () => {
+    
+    let trainingData = data.split(/(\.|\?|\!)/g)
+    debugger
+    let markov = new MarkovGen({
+        input: trainingData,
+        minLength: 10
+      });
+    let sentence = markov.makeChain();
+    console.log(sentence);
 }
 export default {
     ...crudControllers(Person),

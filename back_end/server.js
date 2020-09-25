@@ -3,7 +3,6 @@ import json from 'body-parser';
 import urlencoded from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import { connect } from './utils/db.js';
 
 // Express Route
