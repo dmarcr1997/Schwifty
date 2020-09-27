@@ -3,10 +3,10 @@ import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema(
     {
-        content:[{
+        content:{
             type:String,
             trim:true
-        }],
+        },
         createdBy:{
             type:mongoose.SchemaTypes.ObjectId,
             ref:'person',
@@ -17,4 +17,4 @@ const postSchema = new mongoose.Schema(
     {timestamps: true}
 )
 
-export const post = mongoose.model('post', postSchema)
+export const Post = mongoose.model('post', postSchema)

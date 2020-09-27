@@ -2,7 +2,8 @@ import {crudControllers } from '../../utils/crud.js';
 import { Person } from './person.model.js';
 import request from 'request';
 import MarkovGen from 'markov-generator';
-import { data } from '../data.js';
+import tData from '../data.js';
+import { Post } from '../posts/post.model.js';
 
 const callAPI = async (req, res) => {
     await request
@@ -10,12 +11,11 @@ const callAPI = async (req, res) => {
         createPeople(res, JSON.parse(body))
     })
 }
-const createPeople = (res, data) => {
+const createPeople = async (res, data) => {
     let count = 0
     let personList = data.results
-    console.log(personList)
     for (let d = 0; d < personList.length; d++){
-        Person.create({
+        let newPerson = await Person.create({
             name: personList[d].name,
             image: personList[d].image,
             status: personList[d].status,
@@ -24,6 +24,13 @@ const createPeople = (res, data) => {
             location: personList[d].location.name,
             location_link: personList[d].location.url
         })
+        let posts = generateText();
+        posts.split(/(\.|\?|\!)/g)
+        .filter(sen => sen !== '?' && sen !== '!' && sen !== '.' && sen !== ',' && sen !== ' ')
+        .map(async post => await Post.create({
+            content: post,
+            createdBy: newPerson._id
+        }))
         count += 1
     }
     console.log(`Created ${count} people on the API`)
@@ -37,20 +44,17 @@ const GetRandomPerson = async (req, res) => {
     let min = Math.ceil(0);
     let max = Math.floor(people.length);
     let indx = Math.floor(Math.random() * (max - min + 1)) + min;
-    generateText();
     res.send(people[indx])
 }
 
 const generateText = () => {
-    
-    let trainingData = data.split(/(\.|\?|\!)/g)
-    debugger
+
     let markov = new MarkovGen({
-        input: trainingData,
-        minLength: 10
+        input: tData,
+        minLength: 1
       });
     let sentence = markov.makeChain();
-    console.log(sentence);
+    return sentence;
 }
 export default {
     ...crudControllers(Person),
