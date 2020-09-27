@@ -7,12 +7,13 @@ import { Post } from '../posts/post.model.js';
 
 const callAPI = async (req, res) => {
     await request
-    .get('https://rickandmortyapi.com/api/character?page=2', (err, resp, body) => {
+    .get('https://rickandmortyapi.com/api/character?page=3', (err, resp, body) => {
         createPeople(res, JSON.parse(body))
     })
 }
 const createPeople = async (res, data) => {
     let count = 0
+    let count2 = 0
     let personList = data.results
     for (let d = 0; d < personList.length; d++){
         let newPerson = await Person.create({
@@ -25,13 +26,19 @@ const createPeople = async (res, data) => {
             location_link: personList[d].location.url
         })
         let posts = generateText();
-        posts.split(/(\.|\?|\!)/g)
+        await posts.split(/(\.|\?|\!)/g)
         .filter(sen => sen !== '?' && sen !== '!' && sen !== '.' && sen !== ',' && sen !== ' ')
-        .map(async post => await Post.create({
-            content: post,
-            createdBy: newPerson._id
-        }))
+        .map(async post => {
+            await Post.create({
+                content: post,
+                createdBy: newPerson._id
+            })
+            count2 +=1
+        })
+       
         count += 1
+        console.log(`Created ${count2} for person ${count}`)
+        count2 = 0
     }
     console.log(`Created ${count} people on the API`)
     res.redirect('/person')
@@ -44,7 +51,11 @@ const GetRandomPerson = async (req, res) => {
     let min = Math.ceil(0);
     let max = Math.floor(people.length);
     let indx = Math.floor(Math.random() * (max - min + 1)) + min;
-    res.send(people[indx])
+    let randomPerson = people[indx]
+    let posts = Post.find({ createdBy: randomPerson._id })
+    .lean()
+    .exec()
+    res.send({person: randomPerson, posts: posts})
 }
 
 const generateText = () => {
