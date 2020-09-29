@@ -9,6 +9,6 @@ router.route('/')
    
 router.route('/:id')
     .get(controllers.getOne);
-router.route('/admin/call')
+router.route('/admin/call/:id')
     .get(controllers.call);
 export default router

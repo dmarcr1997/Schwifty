@@ -6,8 +6,10 @@ import tData from '../data.js';
 import { Post } from '../posts/post.model.js';
 
 const callAPI = async (req, res) => {
+    const pageNum = req.params.id;
+    console.log(pageNum);
     await request
-    .get('https://rickandmortyapi.com/api/character?page=3', (err, resp, body) => {
+    .get(`https://rickandmortyapi.com/api/character?page=${pageNum}`, (err, resp, body) => {
         createPeople(res, JSON.parse(body))
     })
 }
@@ -26,8 +28,7 @@ const createPeople = async (res, data) => {
             location_link: personList[d].location.url
         })
         let posts = generateText()[0].replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
-    
-        console.log(`newPosts: ${posts[0]}`)
+
         posts.map(async post => {
             let newPost = await 
             Post.create({
