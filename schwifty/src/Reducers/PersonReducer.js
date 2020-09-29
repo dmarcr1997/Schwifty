@@ -8,6 +8,7 @@ export const personReducer = (state = {
         location: '',
         type: '',
         messages: '',
+        posts: [],
         loggedIn: false
     },
     users: []
@@ -15,16 +16,18 @@ export const personReducer = (state = {
     switch(action.type){
         case 'GET_USER':
             let user = action.user
+            debugger
             return{
                 ...state,
                 user: {
-                    id: user._id,
-                    name: user.name,
-                    image: user.image,
-                    status: user.status,
-                    species: user.species,
-                    location: user.location,
-                    type: user.type,
+                    id: user.person._id,
+                    name: user.person.name,
+                    image: user.person.image,
+                    status: user.person.status,
+                    species: user.person.species,
+                    location: user.person.location,
+                    type: user.person.type,
+                    posts: [...user.posts],
                     loggedIn: true
                 }
             } //add messages later

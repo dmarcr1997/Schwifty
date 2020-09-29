@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import { Grid, Image, Text,Heading, Stack } from "@chakra-ui/core";
+import { Grid, Image, Text,Heading, Stack, Box } from "@chakra-ui/core";
 import { connect } from 'react-redux';
 class Profile extends Component{
-    state={
-        text: []
-    }
 
     async componentDidMount(){
         this.props.setLinks(['/home', '/message'])
@@ -16,8 +13,8 @@ class Profile extends Component{
             <Stack align='center' justify='center'> 
                 <Grid bg='#69AD53' borderRadius={10} w='70%' templateColumns="repeat(3, 1fr)" p={5} gap={8}>
                     <Stack><Text> </Text></Stack>
-                    <Heading as='h1' fontSize='2xl'>{this.props.name}</Heading>
                     <Stack isInline w='100%' align='center'>
+                        <Heading as='h1' fontSize='2xl'>{this.props.name}</Heading>
                         <Image border='5px white solid' size='xl' src={this.props.image} alt='turle'/>
                         <Text border='5px white solid' bg='black' as='b' fontSize='2em' color='#314E11' size='xl'>
                             status: {this.props.status}<br/>
@@ -28,13 +25,8 @@ class Profile extends Component{
                     </Stack>
                     <Stack><Text> </Text></Stack>
                     <Stack><Text> </Text></Stack>
-                    <Stack  bg='black' color='white' borderRadius={10} isInline w='100%' align='center'>
-                        <Text id='text1' size='xl'>
-                            {this.state.text[0]}
-                        </Text>
-                        <Text id='textid' size='xl'>
-                            {this.state.text[1]}
-                        </Text>
+                    <Stack  left='5' bg='black' color='white' borderRadius={10} w='100%'>
+                        {this.props.posts.map(p =>  <Box size='xl' color='black' bg='gray.100'><Heading as='h2'>Post from:{p.createdAt.split('T')[0]}</Heading><Text id={p._id} fontSize='xl' w='100%' size='md'>{p.content}</Text></Box>)}  
                     </Stack>
                     <Stack><Text> </Text></Stack>
                 </Grid>
@@ -50,7 +42,8 @@ const mapStateToProps = state => {
         species: state.user.species,
         image: state.user.image,
         location: state.user.location,
-        status: state.user.status
+        status: state.user.status,
+        posts: state.user.posts
     })
 }
 
