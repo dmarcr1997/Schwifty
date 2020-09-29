@@ -22,6 +22,7 @@ const personSchema = new mongoose.Schema(
         type: String,
         location:String,
         location_link:String,
+        posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'post'}]
     },
     {timestamps: true}
 )

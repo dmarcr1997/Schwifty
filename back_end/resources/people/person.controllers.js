@@ -25,16 +25,18 @@ const createPeople = async (res, data) => {
             location: personList[d].location.name,
             location_link: personList[d].location.url
         })
-        let posts = generateText();
-        await posts.split(/(\.|\?|\!)/g)
-        .filter(sen => sen !== '?' && sen !== '!' && sen !== '.' && sen !== ',' && sen !== ' ')
-        .map(async post => {
-            await Post.create({
+        let posts = generateText()[0].replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
+    
+        console.log(`newPosts: ${posts[0]}`)
+        posts.map(async post => {
+            let newPost = await 
+            Post.create({
                 content: post,
                 createdBy: newPerson._id
-            })
-            count2 +=1
-        })
+            });
+            newPerson.posts.push(newPost)
+            count2 +=1;
+        });
        
         count += 1
         console.log(`Created ${count2} for person ${count}`)
@@ -51,11 +53,9 @@ const GetRandomPerson = async (req, res) => {
     let min = Math.ceil(0);
     let max = Math.floor(people.length);
     let indx = Math.floor(Math.random() * (max - min + 1)) + min;
-    let randomPerson = people[indx]
-    let posts = Post.find({ createdBy: randomPerson._id })
-    .lean()
-    .exec()
-    res.send({person: randomPerson, posts: posts})
+    let randomPerson = people[indx];
+    let randPosts = await Post.find({ createdBy: randomPerson._id});
+    res.send({person: randomPerson, posts: randPosts});
 }
 
 const generateText = () => {
@@ -65,7 +65,7 @@ const generateText = () => {
         minLength: 1
       });
     let sentence = markov.makeChain();
-    return sentence;
+    return sentence.split();
 }
 export default {
     ...crudControllers(Person),

@@ -5,11 +5,12 @@ const postSchema = new mongoose.Schema(
     {
         content:{
             type:String,
-            trim:true
+            trim:true,
+            required: true
         },
         createdBy:{
-            type:mongoose.SchemaTypes.ObjectId,
-            ref:'person',
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'person',
             required: true
         },
      
