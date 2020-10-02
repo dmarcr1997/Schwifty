@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema(
     {
+        authorName:{
+            type:String,
+            trim:true,
+            required:true
+        },
         content:{
             type:String,
             trim:true,

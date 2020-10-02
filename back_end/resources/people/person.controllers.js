@@ -32,6 +32,7 @@ const createPeople = async (res, data) => {
         posts.map(async post => {
             let newPost = await 
             Post.create({
+                authorName: newPerson.name,
                 content: post,
                 createdBy: newPerson._id
             });
@@ -50,7 +51,6 @@ const createPeople = async (res, data) => {
 const GetPeople = async (req, res) => {
     const people = await Person.find({})
     const posts = await Post.find({})
-
     res.send({people, posts})
 }
 

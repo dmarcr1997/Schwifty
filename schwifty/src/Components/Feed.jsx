@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Grid, Flex, Box, Collapse, Text, Heading, Button} from "@chakra-ui/core";
+import {Stack, Grid, Flex, Box, Collapse, Text, Heading, Button, Image} from "@chakra-ui/core";
+import { connect } from 'react-redux';
 import PortalGun from '../media/portalGun.jpg';
 class Feed extends Component{
 
@@ -22,7 +23,7 @@ class Feed extends Component{
         return(
             <>
             <Grid w='100%' h='100%' color='white' templateColumns="repeat(3, 1fr)" gap={6}>
-                <Flex align="center" justify="center" w='100%' bg='gray.800'>
+                <Flex justify="center" w='100%' bg='gray.800'>
                     <Box w='80%'>
                         <Heading as='u'>People</Heading>
                         <Flex w='100%'>
@@ -30,16 +31,21 @@ class Feed extends Component{
                         </Flex>
                     </Box>
                 </Flex>
-                <Flex align="center" justify="center" w='100%' bg='gray.800'>
+                <Flex justify="center" w='100%' bg='gray.800'>
                     <Box w='80%'>
                         <Heading as='u'>Content</Heading>
-                        <Text>Hi</Text>
+                        {this.props.posts.map(post =>
+                        <Flex p={0} m={5} color='black' bg='gray.100'>
+                            <Heading as='h3'>{post.authorName}<br/><small>{post.createdAt.split('T')[0]}</small></Heading>
+                            <Text id={post._id} fontSize='lg' w='100%' size='sm'>{post.content} </Text>
+                           
+                        </Flex>)}
                     </Box>
                 </Flex>
-                <Flex align="center" justify="center" w='100%' bg='gray.800'>
+                <Flex justify="center" w='100%' bg='gray.800'>
                     <Box w='80%'>
                         <Heading as='u'>Images</Heading>
-                        <Text>Hi</Text>
+                        {this.props.users.map(user => <Image size='sm' src={user.image} alt='turle'/>)}
                     </Box>
                 </Flex>
             </Grid><br/>
@@ -57,4 +63,11 @@ class Feed extends Component{
     }
 }
 
-export default Feed;
+const mapStateToProps = state => {
+    return({
+        users: state.users,
+        posts: state.posts
+    })
+}
+
+export default connect(mapStateToProps)(Feed);

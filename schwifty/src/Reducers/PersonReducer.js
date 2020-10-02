@@ -11,11 +11,17 @@ export const personReducer = (state = {
         posts: [],
         loggedIn: false
     },
-    users: []
+    users: [],
+    posts: []
 }, action) => {
     switch(action.type){
         case 'GET_USERS':
-            debugger
+            let data = action.data
+            return{
+                ...state,
+                users: data.people,
+                posts: data.posts
+            }
         case 'GET_USER':
             let user = action.user
             debugger
@@ -50,3 +56,4 @@ export const personReducer = (state = {
             }
     }
 }
+
