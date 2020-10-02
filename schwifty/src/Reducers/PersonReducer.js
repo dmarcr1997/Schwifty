@@ -14,6 +14,8 @@ export const personReducer = (state = {
     users: []
 }, action) => {
     switch(action.type){
+        case 'GET_USERS':
+            debugger
         case 'GET_USER':
             let user = action.user
             debugger

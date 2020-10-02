@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import { Grid, Box, Image, Text,Heading } from "@chakra-ui/core";
 import portal from '../media/portalRM.png';
 import { connect } from 'react-redux';
-import { getUser } from '../Actions/PersonActions';
+import { getUser, getUsers } from '../Actions/PersonActions';
 
 class Landing extends Component {
 
     login = () => {
       this.props.getUser()
+      this.props.getUsers()
       this.props.goToHomePage()
     }
     render(){
@@ -41,7 +42,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return{
-    getUser: () => dispatch(getUser())
+    getUser: () => dispatch(getUser()),
+    getUsers: () => dispatch(getUsers())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)  

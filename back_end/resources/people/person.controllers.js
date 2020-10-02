@@ -47,6 +47,13 @@ const createPeople = async (res, data) => {
     res.redirect('/person')
 }
 
+const GetPeople = async (req, res) => {
+    const people = await Person.find({})
+    const posts = await Post.find({})
+
+    res.send({people, posts})
+}
+
 const GetRandomPerson = async (req, res) => {
     const people = await Person.find({})
     
@@ -70,6 +77,7 @@ const generateText = () => {
 }
 export default {
     ...crudControllers(Person),
+    getMany: GetPeople,
     getOne: GetRandomPerson,
     call: callAPI
 }

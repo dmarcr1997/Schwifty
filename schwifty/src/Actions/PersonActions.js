@@ -8,3 +8,15 @@ export const getUser = () => {
         .catch(error => console.log(error.message))
     }
 }
+
+export const getUsers = () => {
+    return (dispatch) => {
+        fetch('http://localhost:4000/person')
+        .then(resp => resp.json())
+        .then(data => {
+            debugger
+            return dispatch({type: 'GET_USERS', data})
+        })
+        .catch(error => console.log(error.message))
+    }
+}
